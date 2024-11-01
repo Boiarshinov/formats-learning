@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+//Сгенерированные классы будут уложены в этот пакет
+package formats.protobuf;
+
+/* Длинный комментарий, который превратится в javadoc на класс.
+ * Все начинается с ключевого слова `message` */
+message SimpleMessage {
+  string name = 1; //Комментарий превратится в javadoc к полю
+  int32 version = 2;
+}
+
+message DataTypesMessage {
+  int32 integer32 = 1;
+  uint32 unsignedInt32 = 2; // беззнаковое
+  sint32 signedInt32 = 3; // со знаком. Вроде как лучше энкодит отрицательные числа, чем int32
+
+  int64 integer64 = 4;
+  uint64 unsignedInt64 = 5;
+  sint64 signedInt64 = 6;
+
+  float floatField = 7;
+  double doubleField = 8;
+
+  bool flag = 9;
+
+  bytes rawBytesField = 10;
+
+  string strField = 11;
+  Status enumField = 12;
+
+  NestedMessage nested = 13;
+
+  repeated int32 intCollection = 14; // Повторяющееся значение. Аналог списка
+  repeated string strCollection = 15;
+  optional int32 intOpt = 16; //
+  optional string strOpt = 17;
+}
+
+message NestedMessage {
+  string name = 1;
+}
+
+// Перечисление
+enum Status {
+  UNKNOWN = 0;
+  SUCCESS = 1;
+  FAIL = 2;
+}
