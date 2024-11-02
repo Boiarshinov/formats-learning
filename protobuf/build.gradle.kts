@@ -3,14 +3,15 @@ plugins {
     id("com.google.protobuf") version "0.9.4"
 }
 
+val protobufVersion = "3.25.5"
 dependencies {
-    implementation("com.google.protobuf:protobuf-java:3.25.5")
-    implementation("com.google.protobuf:protobuf-kotlin:3.25.5")
+    implementation("com.google.protobuf:protobuf-java:$protobufVersion")
+    implementation("com.google.protobuf:protobuf-kotlin:$protobufVersion")
 }
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:3.25.5"
+        artifact = "com.google.protobuf:protoc:$protobufVersion"
     }
 
     generateProtoTasks {

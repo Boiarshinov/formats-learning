@@ -47,3 +47,13 @@ enum Status {
   SUCCESS = 1;
   FAIL = 2;
 }
+
+message OptionalFieldsMessage {
+  optional int32 intField = 1;
+  optional string strField = 2;
+}
+
+message NotOptionalFieldsMessage {
+  int32 intField = 1;
+  string strField = 2;
+}
