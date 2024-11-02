@@ -48,6 +48,11 @@ enum Status {
   FAIL = 2;
 }
 
+/*
+ * Ключевое слово optional было в proto2, но его убрали в proto3.
+ * Спустя время поняли, что сделали это зря и вернули в v3.15.
+ * https://github.com/protocolbuffers/protobuf/blob/main/docs/field_presence.md
+ */
 message OptionalFieldsMessage {
   optional int32 intField = 1;
   optional string strField = 2;
