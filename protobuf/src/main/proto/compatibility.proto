@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package formats.protobuf;
+
+message OldMessage {
+  bool terminated = 1;
+  int32 numericField = 2;
+  string singularField = 3;
+}
+
+message NewMessage {
+  reserved 1; // меняем bool на enum, чтобы расширить количество значений
+  Status status = 4;
+  int64 numericField = 2; // был int32, перестало хватать
+  repeated string repeatedField = 3; // до этого одиночное значение, теперь список
+
+  enum Status {
+    UNKNOWN = 0;
+    ALIVE = 1;
+    TERMINATED = 2;
+    PAUSED = 3;
+  }
+}

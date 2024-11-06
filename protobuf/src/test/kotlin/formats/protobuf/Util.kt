@@ -8,3 +8,7 @@ fun assertHexEncoding(expected: String, message: Message) {
     val hexString = Hex.encodeHexString(message.toByteArray())
     assertEquals(expected, hexString)
 }
+
+fun Message.toHexString(): String {
+    return Hex.encodeHexString(this.toByteArray())
+}
