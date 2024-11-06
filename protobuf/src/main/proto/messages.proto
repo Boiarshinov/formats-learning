@@ -1,4 +1,5 @@
 syntax = "proto3";
+// Обязательная строчка. Либо указывается edition, либо syntax: proto2 или proto3
 
 //Сгенерированные классы будут уложены в этот пакет
 package formats.protobuf;
@@ -11,30 +12,39 @@ message SimpleMessage {
 }
 
 message DataTypesMessage {
-  int32 integer32 = 1;
+  int32 integer32 = 1; // Для отрицательных значений лучше использовать sint
   uint32 unsignedInt32 = 2; // беззнаковое
-  sint32 signedInt32 = 3; // со знаком. Вроде как лучше энкодит отрицательные числа, чем int32
+  sint32 signedInt32 = 3; // со знаком. Лучше энкодит отрицательные числа, чем int32
+  fixed32 fixedInt32 = 4; // Всегда занимает 4 байта. Эффективнее, чем int32 хранит огромные значения (> 2^28)
+  sfixed32 sfixedInt32 = 5; // Всегда занимает 4 байта
 
-  int64 integer64 = 4;
-  uint64 unsignedInt64 = 5;
-  sint64 signedInt64 = 6;
+  int64 integer64 = 6;
+  uint64 unsignedInt64 = 7;
+  sint64 signedInt64 = 8;
+  fixed64 fixedInt64 = 9;
+  sfixed64 sfixedInt64 = 10;
 
-  float floatField = 7;
-  double doubleField = 8;
+  float floatField = 11;
+  double doubleField = 12;
 
-  bool flag = 9;
+  bool flag = 13;
+  bytes rawBytesField = 14;
+  string strField = 15;
 
-  bytes rawBytesField = 10;
+  Status enumField = 16;
+  NestedMessage nested = 17;
 
-  string strField = 11;
-  Status enumField = 12;
+  repeated int32 intCollection = 18; // Повторяющееся значение. Аналог списка
+  repeated string strCollection = 19;
 
-  NestedMessage nested = 13;
+  oneof variants {
+    string stringVariant = 20;
+    int32 integerVariant = 21;
+    bool boolVariant = 22;
+    NestedMessage nestedVariant = 23;
+  }
 
-  repeated int32 intCollection = 14; // Повторяющееся значение. Аналог списка
-  repeated string strCollection = 15;
-  optional int32 intOpt = 16; //
-  optional string strOpt = 17;
+  map<string, string> mapField = 24;
 }
 
 message NestedMessage {
@@ -46,6 +56,7 @@ enum Status {
   UNKNOWN = 0;
   SUCCESS = 1;
   FAIL = 2;
+  SO_BIG = 128; // Номер точно не влезет в 7 бит
 }
 
 /*
