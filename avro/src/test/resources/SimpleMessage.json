@@ -1,0 +1,14 @@
+{
+  "type": "record",
+  "name": "SimpleMessage",
+  "fields": [
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "version",
+      "type": "string"
+    }
+  ]
+}

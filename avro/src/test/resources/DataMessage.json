@@ -1,0 +1,37 @@
+{
+  "type" : "record",
+  "name" : "DataMessage",
+  "fields" : [ {
+    "name" : "text",
+    "type" : [ "null", "string" ],
+    "default" : null
+  }, {
+    "name" : "doubleField",
+    "type" : "double"
+  }, {
+    "name" : "flag",
+    "type" : "boolean"
+  }, {
+    "name" : "floatField",
+    "type" : "float"
+  }, {
+    "name" : "longField",
+    "type" : "long"
+  }, {
+    "name" : "intField",
+    "type" : "int"
+  }, {
+    "name" : "shortField",
+    "type" : "int"
+  }, {
+    "name" : "byteField",
+    "type" : "int"
+  }, {
+    "name" : "mapField",
+    "type" : {
+      "type" : "map",
+      "values" : "string"
+    },
+    "default" : { }
+  } ]
+}

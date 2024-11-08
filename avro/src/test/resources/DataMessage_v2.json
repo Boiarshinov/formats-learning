@@ -1,0 +1,61 @@
+{
+  "type" : "record",
+  "name" : "DataMessage",
+  "fields" : [ {
+    "name" : "text",
+    "type" : [ "null", "string" ],
+    "default" : null
+  }, {
+    "name" : "newVersionField",
+    "type" : [ "string", "null" ],
+    "default" : "Hello"
+  }, {
+    "name" : "doubleField",
+    "type" : "double"
+  }, {
+    "name" : "flag",
+    "type" : "boolean"
+  }, {
+    "name" : "floatField",
+    "type" : "float"
+  }, {
+    "name" : "longField",
+    "type" : "long"
+  }, {
+    "name" : "intField",
+    "type" : "int"
+  }, {
+    "name" : "shortField",
+    "type" : "int"
+  }, {
+    "name" : "byteField",
+    "type" : "int"
+  }, {
+    "name" : "enumField",
+    "type" : {
+      "type" : "enum",
+      "name" : "MyEnum",
+      "symbols" : [ "SPADES", "DIAMONDS", "CLUBS" ],
+      "default" : "DIAMONDS",
+      "aliases" : [ "MyEnum" ]
+    }
+  }, {
+    "name" : "mapField",
+    "type" : {
+      "type" : "map",
+      "values" : "string"
+    },
+    "default" : { }
+  }, {
+    "name" : "bigDecimalAsString",
+    "type" : "string"
+  }, {
+    "name" : "bigDecimalAsBytes",
+    "type" : {
+      "type" : "bytes",
+      "logicalType" : "decimal",
+      "precision" : 3,
+      "scale" : 2
+    }
+  } ]
+}
