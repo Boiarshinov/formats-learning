@@ -159,6 +159,8 @@ class DataTypesBinaryFormatTest {
         assertHexEncoding("a801" + "01", dataTypesMessage { integerVariant = 1 })
         assertHexEncoding("b001" + "01", dataTypesMessage { boolVariant = true })
         assertHexEncoding("ba01" + "030a0131", dataTypesMessage { nestedVariant = nestedMessage { name = "1" } })
+        // Дефолтное значение тоже сериализуется
+        assertHexEncoding("a801" + "00", dataTypesMessage { integerVariant = 0 })
     }
 
     @Test
