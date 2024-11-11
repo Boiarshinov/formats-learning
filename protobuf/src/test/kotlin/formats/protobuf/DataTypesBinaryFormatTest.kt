@@ -127,8 +127,8 @@ class DataTypesBinaryFormatTest {
         // Значение тэга определяется так: 2-5 биты первого байта - это младшие биты значения.
         // 2-8 биты второго байта - это старшие биты значения.
         // Если в 1 бите второго байта выставлена 1, то добавляется третий байт и т.д.
-        assertHexEncoding("8001" + "01", dataTypesMessage { enumField = Messages.Status.SUCCESS })
-        assertHexEncoding("8001" + "02", dataTypesMessage { enumField = Messages.Status.FAIL })
+        assertHexEncoding("8001" + "01", dataTypesMessage { enumField = Messages.Status.STATUS_SUCCESS })
+        assertHexEncoding("8001" + "02", dataTypesMessage { enumField = Messages.Status.STATUS_FAIL })
     }
 
     @Test

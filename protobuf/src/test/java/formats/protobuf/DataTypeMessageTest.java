@@ -35,7 +35,7 @@ public class DataTypeMessageTest {
         assertEquals(0, message.getRawBytesField().size());
         assertEquals("", message.getStrField());
 
-        assertEquals(Messages.Status.UNKNOWN, message.getEnumField());
+        assertEquals(Messages.Status.STATUS_UNKNOWN, message.getEnumField());
         assertEquals(false, message.hasNested());
 
         assertEquals(0, message.getIntCollectionCount());
