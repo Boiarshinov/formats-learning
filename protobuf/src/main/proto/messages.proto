@@ -4,6 +4,17 @@ syntax = "proto3";
 //Сгенерированные классы будут уложены в этот пакет
 package formats.protobuf;
 
+// Название класса, в котором будет помойка из внутренних классов сообщений.
+// Если не указывать, то будет использоваться название файла.
+option java_outer_classname = "Messages";
+
+// Разбивать ли на несколько файлов или все в одну помойку, по умолчанию false.
+option java_multiple_files = false;
+
+// На что будет оптимизирован сгенерированный код: SPEED, CODE_SIZE, LITE_RUNTIME.
+// Дефолт: SPEED
+option optimize_for = SPEED;
+
 /* Длинный комментарий, который превратится в javadoc на класс.
  * Все начинается с ключевого слова `message` */
 message SimpleMessage {
@@ -12,39 +23,42 @@ message SimpleMessage {
 }
 
 message DataTypesMessage {
-  int32 integer32 = 1; // Для отрицательных значений лучше использовать sint
-  uint32 unsignedInt32 = 2; // беззнаковое
-  sint32 signedInt32 = 3; // со знаком. Лучше энкодит отрицательные числа, чем int32
-  fixed32 fixedInt32 = 4; // Всегда занимает 4 байта. Эффективнее, чем int32 хранит огромные значения (> 2^28)
-  sfixed32 sfixedInt32 = 5; // Всегда занимает 4 байта
+  // Для полей рекомендуется snake_case.
+
+  int32 integer32 = 1; // Хорошо энкодит маленькие положительные числа. Для отрицательных значений лучше использовать sint
+  uint32 unsigned_int32 = 2; // беззнаковое. Для Java не имеет особого смысла
+  sint32 signed_int32 = 3; // со знаком. Лучше энкодит отрицательные числа, чем int32
+  fixed32 fixed_int32 = 4; // Всегда занимает 4 байта. Эффективнее, чем int32 хранит огромные значения (> 2^28)
+  sfixed32 sfixed_int32 = 5; // Всегда занимает 4 байта
 
   int64 integer64 = 6;
-  uint64 unsignedInt64 = 7;
-  sint64 signedInt64 = 8;
-  fixed64 fixedInt64 = 9;
-  sfixed64 sfixedInt64 = 10;
+  uint64 unsigned_int64 = 7;
+  sint64 signed_int64 = 8;
+  fixed64 fixed_int64 = 9;
+  sfixed64 sfixed_int64 = 10;
 
-  float floatField = 11;
-  double doubleField = 12;
+  float float_field = 11;
+  double double_field = 12;
 
   bool flag = 13;
-  bytes rawBytesField = 14;
-  string strField = 15;
+  bytes raw_bytes_field = 14;
+  string str_field = 15;
 
-  Status enumField = 16;
+  Status enum_field = 16;
   NestedMessage nested = 17;
 
-  repeated int32 intCollection = 18; // Повторяющееся значение. Аналог списка
-  repeated string strCollection = 19;
+  repeated int32 int_collection = 18; // Повторяющееся значение. Аналог списка
+  repeated string str_collection = 19;
 
   oneof variants {
-    string stringVariant = 20;
-    int32 integerVariant = 21;
-    bool boolVariant = 22;
-    NestedMessage nestedVariant = 23;
+    string string_variant = 20;
+    int32 integer_variant = 21;
+    bool bool_variant = 22;
+    NestedMessage nested_variant = 23;
   }
 
-  map<string, string> mapField = 24;
+  map<string, string> map_field = 24;
+//  map<NestedMessage, string> not_possible = 25; // Только строки и числа могут быть ключами в мапе
 }
 
 message NestedMessage {
@@ -53,10 +67,12 @@ message NestedMessage {
 
 // Перечисление
 enum Status {
-  UNKNOWN = 0;
-  SUCCESS = 1;
-  FAIL = 2;
-  SO_BIG = 128; // Номер точно не влезет в 7 бит
+  // Название каждого перечисления лучше начинать с одинакового суффикса, чтобы в тех языках, где нет enum'ов
+  // с ними было комфортно работать. Если из языков будет только Java, то можно не заморачиваться.
+  STATUS_UNKNOWN = 0; // Нулевое всегда должно быть UNKNOWN или UNSPECIFIED. Потому что это дефолтное значение
+  STATUS_SUCCESS = 1;
+  STATUS_FAIL = 2;
+  STATUS_SO_BIG = 128; // Номер точно не влезет в 7 бит
 }
 
 /*
@@ -65,11 +81,11 @@ enum Status {
  * https://github.com/protocolbuffers/protobuf/blob/main/docs/field_presence.md
  */
 message OptionalFieldsMessage {
-  optional int32 intField = 1;
-  optional string strField = 2;
+  optional int32 int_field = 1;
+  optional string str_field = 2;
 }
 
 message NotOptionalFieldsMessage {
-  int32 intField = 1;
-  string strField = 2;
+  int32 int_field = 1;
+  string str_field = 2;
 }

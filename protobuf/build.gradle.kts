@@ -6,6 +6,7 @@ plugins {
 val protobufVersion = "3.25.5"
 dependencies {
     implementation("com.google.protobuf:protobuf-java:$protobufVersion")
+    implementation("com.google.protobuf:protobuf-java-util:$protobufVersion")
     implementation("com.google.protobuf:protobuf-kotlin:$protobufVersion")
 }
 
