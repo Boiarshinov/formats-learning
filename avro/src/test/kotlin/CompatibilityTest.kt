@@ -15,7 +15,7 @@ class CompatibilityTest {
         // Добавлены поля bigDecimalAsString, bigDecimalAsBytes, enumField
         val dataMessage = Avro.schema<DataMessage>()
         val compatibility = SchemaCompatibility.checkReaderWriterCompatibility(schema, dataMessage)
-        assertEquals(SchemaCompatibility.SchemaCompatibilityType.COMPATIBLE, compatibility.result.compatibility)
+        assertEquals(compatibility.result.compatibility, SchemaCompatibility.SchemaCompatibilityType.COMPATIBLE)
     }
 
     @DisplayName("Старый код может работать с новой версией сообщения")
@@ -25,6 +25,6 @@ class CompatibilityTest {
         val schema = Schema.Parser().parse(javaClass.getResourceAsStream("DataMessage_v2.json"))
         val dataMessage = Avro.schema<DataMessage>()
         val compatibility = SchemaCompatibility.checkReaderWriterCompatibility(schema, dataMessage)
-        assertEquals(SchemaCompatibility.SchemaCompatibilityType.COMPATIBLE, compatibility.result.compatibility)
+        assertEquals(compatibility.result.compatibility, SchemaCompatibility.SchemaCompatibilityType.COMPATIBLE)
     }
 }
